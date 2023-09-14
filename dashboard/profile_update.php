@@ -7,7 +7,9 @@ $name = $_POST['name'];
 $name_update_btn = $_POST['name_update'];
 $email = $_POST['email'];
 $email_update_btn = $_POST['email_update'];
+$password_update_btn = $_POST['password_update'];
 
+// name update is here
 if(isset($name_update_btn )){
     if($name){
         $user_id = $_SESSION['admin_id'];
@@ -43,5 +45,53 @@ if(isset($email_update_btn)){
     }
 }
 
+
+// password update is here
+
+if(isset($password_update_btn)){
+    $user_id = $_SESSION['admin_id'];
+   $current_password = $_POST['current_password'];
+   $new_password = $_POST['new_password'];
+   $confirm_password = $_POST['confirm_password'];
+    
+   if($current_password){
+      $encrypt = md5($current_password);
+      $select_password_query = "SELECT COUNT(*) AS password_check FROM users WHERE id='$user_id' AND password='$encrypt'";
+      $select_password_query_connect = mysqli_query($db_connect, $select_password_query);
+     if(mysqli_fetch_assoc($select_password_query_connect)['password_check'] == 1){
+            if($new_password){
+              
+                  if($confirm_password == $current_password){
+                    
+                    $_SESSION['current_confirm_pass_error'] = "You can't use your old password as new password";
+                    header("location: profile.php");
+
+                  }elseif($new_password == $confirm_password){
+                    $new_pass = md5($new_password);
+                    $update_query = "UPDATE users SET password='$new_pass' WHERE id='$user_id'";
+                    mysqli_query($db_connect, $update_query);
+                    $_SESSION['password_success'] = "Your password updated successfully";
+                    header("location: profile.php");
+                }
+                  else{
+                    $_SESSION['confirm_password_error'] = "New password and confirm password can't match";
+                    header("location: profile.php");
+                  }
+            }else{
+                $_SESSION['new_password_error'] = "New Password is missing";
+                header("location: profile.php");
+            }
+
+             
+     }else{
+        $_SESSION['password_error'] = "Current Password didn't match";
+        header("location: profile.php");
+     }
+   }else{
+    $_SESSION['password_error'] = "Current Password is missing";
+    header("location: profile.php");
+   }
+
+}
 
 ?>
