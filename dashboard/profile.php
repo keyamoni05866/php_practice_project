@@ -4,6 +4,7 @@ include('./extends/header.php');
 
 ?>
 
+<!-- name -->
 <?php if (isset($_SESSION['name_update_success'])) : ?>
 
 
@@ -17,7 +18,7 @@ include('./extends/header.php');
 <?php endif;
 unset($_SESSION['name_update_success']) ?>
 
-
+<!-- email -->
 <?php if (isset($_SESSION['email_update_success'])) : ?>
 
 
@@ -31,6 +32,7 @@ unset($_SESSION['name_update_success']) ?>
 <?php endif;
 unset($_SESSION['email_update_success']) ?>
 
+<!-- password -->
 <?php if (isset($_SESSION['password_success'])) : ?>
 
 
@@ -44,8 +46,11 @@ unset($_SESSION['email_update_success']) ?>
 <?php endif;
 unset($_SESSION['password_success']) ?>
 
+
+<!-- password error -->
 <?php if (isset($_SESSION['current_confirm_pass_error'])) : ?>
 
+  
 
 <div class="alert alert-custom " role="alert" style="width: 25%; height: 25%;  float:right;">
   <div class="custom-alert-icon icon-danger"><i class="material-icons-outlined">close</i></div>
@@ -56,6 +61,20 @@ unset($_SESSION['password_success']) ?>
 </div>
 <?php endif;
 unset($_SESSION['current_confirm_pass_error']) ?>
+
+<!-- image success -->
+<?php if (isset($_SESSION['image_success'])) : ?>
+
+
+<div class="alert alert-custom " role="alert" style="width: 25%; height: 25%;  float:right;">
+  <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
+  <div class="alert-content">
+    <span class="alert-title"></span>
+    <span class="alert-text"><?= $_SESSION['image_success']; ?></span>
+  </div>
+</div>
+<?php endif;
+unset($_SESSION['image_success']) ?>
 
 <div class="row">
   <div class="col">
@@ -121,23 +140,11 @@ unset($_SESSION['current_confirm_pass_error']) ?>
 
 
 <!-- password update is here -->
-<div class="col-6">
+<div class="row">
+<div class="col">
 
   <form action="profile_update.php" method="POST">
     <div class="card">
-<!--      
-    <?php if (isset($_SESSION['password_success'])) : ?>
-
-
-<div class="alert alert-custom mt-5 mx-3" role="alert" >
-  <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
-  <div class="alert-content">
-    <span class="alert-title">Congratulations,</span>
-    <span class="alert-text"><?= $_SESSION['password_success']; ?></span>
-  </div>
-</div>
-<?php endif;
-unset($_SESSION['password_success']) ?> -->
 
       <div class="card-header ">
         <h2 class="fs-3 text-center mt-3">Password Update</h2>
@@ -173,6 +180,28 @@ unset($_SESSION['password_success']) ?> -->
     </div>
   </form>
 
+</div>
+
+
+
+<div class="col">
+
+  <form action="profile_update.php" method="POST" enctype="multipart/form-data">
+    <div class="card">
+
+      <div class="card-header ">
+        <h2 class="fs-3 text-center mt-3">Image Update</h2>
+      </div>
+      <div class="card-body">
+      <img style=" height:100px; width:100px; margin-bottom:10px; border-radius:30%;" src="../images/profile_image/<?= $_SESSION['admin_image']?>">
+        <label for="exampleInputEmail1" class="form-label ms-2 mt-2 fs-6"></label>
+        <input type="file" class="form-control form-control-rounded" aria-describedby="..." name="image">
+        <button class="btn btn-info  mt-4 ms-3 text-white" name="image_update">Update</button>
+      </div>
+    </div>
+  </form>
+
+</div>
 </div>
 <?php
 include('./extends/footer.php');
