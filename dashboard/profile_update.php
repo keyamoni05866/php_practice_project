@@ -115,7 +115,7 @@ if(isset($image_update_btn)){
   
     header("location: profile.php");
   }
-  // error baki
+ 
 
 }
 

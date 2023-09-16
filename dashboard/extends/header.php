@@ -31,6 +31,8 @@ if (!isset($_SESSION['admin_id'])) {
     <link href="../assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
     <link href="../assets/plugins/pace/pace.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <!-- Theme Styles -->
     <link href="../assets/css/main.min.css" rel="stylesheet">
@@ -52,14 +54,23 @@ if (!isset($_SESSION['admin_id'])) {
         <div class="app-sidebar">
             <div class="logo">
                 <a href="index.html" class="logo-icon"><span class="logo-text">Neptune</span></a>
-                <div class="sidebar-user-switcher user-activity-online">
+                <div class="sidebar-user-switcher user-activity-online ">
                     <a href="#">
-                        <img style=" height:45px; width: 40px; border-radius: 50%" src="../images/profile_image/<?= $_SESSION['admin_image']?>">
-                        <span class="activity-indicator"></span>
+                        <!-- <span class="activity-indicator"> </span> -->
+
+
                         <span class="user-info-text"><?= $_SESSION['admin_name'] ?><br><span class="user-state-info"><?= $_SESSION['admin_email'] ?></span></span>
+
+
+
+
+
                     </a>
+
                 </div>
+
             </div>
+
             <div class="app-menu">
                 <ul class="accordion-menu">
                     <li class="sidebar-title">
@@ -71,18 +82,22 @@ if (!isset($_SESSION['admin_id'])) {
                     <li class="<?= basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active-page' : ' '; ?>">
                         <a href="profile.php" class="active"><i class="material-icons-two-tone">account_circle</i>Profile</a>
                     </li>
+
+                    <!-- <li class="<?= basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active-page' : ' '; ?>">
+                        <a href="services.php" class="active"><i class="material-icons-two-tone">support_agent</i>Service</a>
+                    </li> -->
                     <li>
                         <a href="mailbox.html"><i class="material-icons-two-tone">inbox</i>Mailbox<span class="badge rounded-pill badge-danger float-end">87</span></a>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="material-icons-two-tone">grid_on</i>Tables<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active-page' : ' '; ?>">
+                        <a href="services.php"><i class="material-icons-two-tone">support_agent</i>Service<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="tables-basic.html">Basic</a>
+                                <a href="services.php">Services Show</a>
                             </li>
                             <li>
-                                <a href="tables-datatable.html">DataTable</a>
+                                <a href="service_add.php">Services ADD</a>
                             </li>
                         </ul>
 
@@ -241,6 +256,16 @@ if (!isset($_SESSION['admin_id'])) {
                                                 </div>
                                             </a>
                                         </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item hidden-on-mobile">
+                                    <div class="sidebar-user-switcher user-activity-online mt-1">
+                                        <a href="#">
+                                            
+                                            <img style="width:40px; height:40px; border-radius:50% " src="../images/profile_image/<?= $_SESSION['admin_image'] ?>">
+                                            <span class="activity-indicator"></span>
+                                        </a>
+
                                     </div>
                                 </li>
                                 <li class="nav-item hidden-on-mobile">
