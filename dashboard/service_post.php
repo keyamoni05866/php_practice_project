@@ -33,6 +33,8 @@ if(isset($_GET['delete_id'])){
     header("location: services.php");
 }
 
+// service update operation
+
 if(isset($_POST['update_btn'])){
     $title = $_POST['title'];
     $icon = $_POST['icon'];
@@ -50,5 +52,29 @@ if(isset($_POST['update_btn'])){
       header("location: service_edit.php");
   }
 
+}
+
+// change status code
+
+if(isset($_GET['change_status'])){
+
+    $id= $_GET['change_status'];
+
+      $select_status = "SELECT * FROM services WHERE id='$id'";
+      $connect=  mysqli_query($db_connect,$select_status);
+      $specif_element = mysqli_fetch_assoc($connect);
+     
+      $get_status = $specif_element['status'];
+
+     
+    if($get_status == 'deactive'){
+             $update_query = "UPDATE services SET status='active' WHERE id='$id'";
+             mysqli_query($db_connect,$update_query);
+             header("location: services.php");
+    }else{
+            $update = "UPDATE services SET status='deactive' WHERE id='$id'";
+            mysqli_query($db_connect,$update);
+            header("location: services.php");
+    }
 }
 ?>

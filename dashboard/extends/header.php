@@ -83,9 +83,7 @@ if (!isset($_SESSION['admin_id'])) {
                         <a href="profile.php" class="active"><i class="material-icons-two-tone">account_circle</i>Profile</a>
                     </li>
 
-                    <!-- <li class="<?= basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active-page' : ' '; ?>">
-                        <a href="services.php" class="active"><i class="material-icons-two-tone">support_agent</i>Service</a>
-                    </li> -->
+                   
                     <li>
                         <a href="mailbox.html"><i class="material-icons-two-tone">inbox</i>Mailbox<span class="badge rounded-pill badge-danger float-end">87</span></a>
                     </li>
@@ -100,7 +98,18 @@ if (!isset($_SESSION['admin_id'])) {
                                 <a href="service_add.php">Services ADD</a>
                             </li>
                         </ul>
-
+                    </li>
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'portfolios.php' ? 'active-page' : ' '; ?>">
+             <a href="portfolios.php"><i class="material-icons-two-tone">folder</i>Portfolios<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="portfolios.php">Services Show</a>
+                            </li>
+                            <li>
+                                <a href="portfolio_add.php">Services ADD</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

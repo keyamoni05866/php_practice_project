@@ -3,14 +3,14 @@ include('./extends/header.php');
 include('../config/db.php');
 
 
-$select_service = "SELECT * FROM services ";
-$services = mysqli_query($db_connect, $select_service);
+$select_portfolio = "SELECT * FROM portfolios";
+$portfolios = mysqli_query($db_connect, $select_portfolio);
 $num = 0;
 ?>
 
 
-<!-- service success -->
-<?php if (isset($_SESSION['service_success'])) : ?>
+<!-- portfolios success -->
+<?php if (isset($_SESSION['portfolio_success'])) : ?>
 
 
 
@@ -18,15 +18,15 @@ $num = 0;
         <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
         <div class="alert-content">
             <span class="alert-title">Congratulations,</span>
-            <span class="alert-text"><?= $_SESSION['service_success']; ?></span>
+            <span class="alert-text"><?= $_SESSION['portfolio_success']; ?></span>
         </div>
     </div>
 <?php endif;
-unset($_SESSION['service_success']) ?>
+unset($_SESSION['portfolio_success']) ?>
 
 
 <!-- service  delete -->
-<?php if (isset($_SESSION['service_delete'])) : ?>
+<?php if (isset($_SESSION['delete_item'])) : ?>
 
 
 
@@ -34,16 +34,16 @@ unset($_SESSION['service_success']) ?>
     <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
     <div class="alert-content">
         <span class="alert-title"></span>
-        <span class="alert-text"><?= $_SESSION['service_delete']; ?></span>
+        <span class="alert-text"><?= $_SESSION['delete_item']; ?></span>
     </div>
 </div>
 <?php endif;
-unset($_SESSION['service_delete']) ?>
+unset($_SESSION['delete_item']) ?>
 
 
 <!-- service updated success -->
 
-<?php if (isset($_SESSION['service_update_success'])) : ?>
+<?php if (isset($_SESSION['portfolio_update_success'])) : ?>
 
 
 
@@ -51,16 +51,16 @@ unset($_SESSION['service_delete']) ?>
     <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
     <div class="alert-content">
         <span class="alert-title">Congratulations,</span>
-        <span class="alert-text"><?= $_SESSION['service_update_success']; ?></span>
+        <span class="alert-text"><?= $_SESSION['portfolio_update_success']; ?></span>
     </div>
 </div>
 <?php endif;
-unset($_SESSION['service_update_success']) ?>
+unset($_SESSION['portfolio_update_success']) ?>
 
 <div class="row">
     <div class="col">
         <div class="page-description">
-            <h1>Service Show</h1>
+            <h1>Portfolio Show</h1>
         </div>
     </div>
 </div>
@@ -85,7 +85,7 @@ unset($_SESSION['service_update_success']) ?>
 
         <div class="card">
             <div class="card-header">
-                <h3 class="text-uppercase">Services List.</h3>
+                <h3 class="text-uppercase">Portfolio List.</h3>
             </div>
         </div>
 
@@ -93,7 +93,7 @@ unset($_SESSION['service_update_success']) ?>
             <thead class="table-dark">
                 <tr>
                     <th scope="">Serial</th>
-                    <th scope="">Icon</th>
+                    <th scope="">Image</th>
                     <th scope="">Title</th>
                     <th scope="">Description</th>
                     <th scope="">Status</th>
@@ -104,29 +104,32 @@ unset($_SESSION['service_update_success']) ?>
             </thead>
             <tbody>
          
-                <?php foreach ($services as $service) : ?>
+                <?php foreach ($portfolios as $portfolio) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
-                        <td><?= $service['icon'] ?></td>
-                        <td><?= $service['title'] ?></td>
-                        <td><?= $service['description'] ?></td>
+                   <td>
+                    <img src="../images/portfolio_image/<?= $portfolio['image'] ?>" alt="" style="height:80px; width:80px; border-radius:50%;">
+                     
+                    </td>
+                        <td><?= $portfolio['title'] ?></td>
+                        <td><?= $portfolio['description'] ?></td>
                         <td>
 
 
-            <?php if ($service['status'] == 'active') : ?>
-            <a href="service_post.php?change_status=<?= $service['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $service['status'] ?></a>
+            <?php if ($portfolio['status'] == 'active') : ?>
+            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
             <?php else : ?>
-            <a href="service_post.php?change_status=<?= $service['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $service['status'] ?></a>
+            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
             <?php endif; ?>
 
                         </td>
 
 
                         <td>
-                            <a href="service_edit.php?edit_id=<?= $service['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
+                            <a href="portfolio_update.php?edit_id=<?= $portfolio['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
                             
                         </td>
-                        <td><a href="service_post.php?delete_id=<?= $service['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
+                        <td><a href="portfolio_post.php?delete_id=<?= $portfolio['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
                     </tr>
                 <?php endforeach; ?>
 
@@ -144,4 +147,3 @@ include('./extends/footer.php')
 
 ?>
 
-<!--  -->

@@ -5,6 +5,13 @@ $users_connect = mysqli_query($db_connect,$users_select_query);
 $users = mysqli_fetch_assoc($users_connect);
 
 
+$select_service = "SELECT * FROM services WHERE status='active' ";
+$services = mysqli_query($db_connect, $select_service);
+
+$select_portfolio = "SELECT * FROM portfolios WHERE status='active' ";
+$portfolios = mysqli_query($db_connect, $select_portfolio);
+
+// print_r($portfolio['image'])
 
 ?>
 
@@ -27,6 +34,7 @@ $users = mysqli_fetch_assoc($users_connect);
         <link rel="stylesheet" href="./frontend_assets/css/animate.min.css">
         <link rel="stylesheet" href="./frontend_assets/css/magnific-popup.css">
         <link rel="stylesheet" href="./frontend_assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./frontend_assets/css/flaticon.css">
         <link rel="stylesheet" href="./frontend_assets/css/slick.css">
         <link rel="stylesheet" href="./frontend_assets/css/aos.css">
@@ -250,61 +258,21 @@ $users = mysqli_fetch_assoc($users_connect);
                             </div>
                         </div>
                     </div>
+                  
 					<div class="row">
+                        <?php foreach($services as $service):?>
 						<div class="col-lg-4 col-md-6">
 							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.2s">
-                                <i class="fab fa-react"></i>
-								<h3>Creative Design</h3>
+                                <i class="<?= $service['icon']?>"></i>
+								<h3><?= $service['title'] ?></h3>
 								<p>
-									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
+                                <?= $service['description'] ?>
 								</p>
 							</div>
 						</div>
-						<div class="col-lg-4 col-md-6">
-							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.4s">
-								<i class="fab fa-free-code-camp"></i>
-								<h3>Unlimited Features</h3>
-								<p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6">
-							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.6s">
-                                <i class="fal fa-desktop"></i>
-								<h3>Ultra Responsive</h3>
-								<p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6">
-							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.2s">
-                                <i class="fal fa-lightbulb-on"></i>
-								<h3>Creative Ideas</h3>
-								<p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6">
-							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.4s">
-                                <i class="fal fa-edit"></i>
-								<h3>Easy Customization</h3>
-								<p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
-								</p>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6">
-							<div class="icon_box_01 wow fadeInLeft" data-wow-delay="0.6s">
-                                <i class="fal fa-headset"></i>
-								<h3>Supper Support</h3>
-								<p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum indust.
-								</p>
-							</div>
-						</div>
+
+                        <?php endforeach;?>
+						
 					</div>
 				</div>
 			</section>
@@ -322,78 +290,23 @@ $users = mysqli_fetch_assoc($users_connect);
                         </div>
                     </div>
                     <div class="row">
+
+                    <?php foreach($portfolios as $portfolio):?>
                         <div class="col-lg-4 col-md-6 pitem">
                             <div class="speaker-box">
 								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/1.jpg" alt="img">
+									<img src="./images/portfolio_image/<?=$portfolio['image'];?>" alt="img" style="width:400px; height:500px">
+                         
 								</div>
 								<div class="speaker-overlay">
 									<span>Design</span>
-									<h4><a href="portfolio-single.html">Hamble Triangle</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
+									<h4><a href="portfolio-single.html"><?= $portfolio['title']?></a></h4>
+									<a href="portfolio-single.html" class="arrow-btn"><?= $portfolio['description']?> <span></span></a>
 								</div>
 							</div>
                         </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/2.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Video</span>
-									<h4><a href="portfolio-single.html">Dark Beauty</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/3.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Audio</span>
-									<h4><a href="portfolio-single.html">Gilroy Limbo.</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-						<div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/4.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Design</span>
-									<h4><a href="portfolio-single.html">Ipsum which</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/5.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Creative</span>
-									<h4><a href="portfolio-single.html">Eiusmod tempor</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./frontend_assets/img/images/6.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>UX/UI</span>
-									<h4><a href="portfolio-single.html">again there</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
+                        <?php endforeach;?>
+                      
                     </div>
                 </div>
             </section>
