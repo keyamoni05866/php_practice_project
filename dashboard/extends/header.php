@@ -82,11 +82,15 @@ if (!isset($_SESSION['admin_id'])) {
                     <li class="<?= basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active-page' : ' '; ?>">
                         <a href="profile.php" class="active"><i class="material-icons-two-tone">account_circle</i>Profile</a>
                     </li>
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'contact.php' ? 'active-page' : ' '; ?>">
+                        <a href="contact.php" class="active"><i class="material-icons-two-tone">import_contacts</i>Contact</a>
+                    </li>
+                    <li class="">
+                        <a href= "http://localhost/kufa/index.php" class="active"><i class="material-icons-two-tone">home</i>Website</a>
+                    </li>
 
                    
-                    <li>
-                        <a href="mailbox.html"><i class="material-icons-two-tone">inbox</i>Mailbox<span class="badge rounded-pill badge-danger float-end">87</span></a>
-                    </li>
+                
 
                     <li class="<?= basename($_SERVER['PHP_SELF']) == 'services.php' ? 'active-page' : ' '; ?>">
                         <a href="services.php"><i class="material-icons-two-tone">support_agent</i>Service<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
@@ -103,10 +107,10 @@ if (!isset($_SESSION['admin_id'])) {
              <a href="portfolios.php"><i class="material-icons-two-tone">folder</i>Portfolios<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="portfolios.php">Services Show</a>
+                                <a href="portfolios.php">Portfolios Show</a>
                             </li>
                             <li>
-                                <a href="portfolio_add.php">Services ADD</a>
+                                <a href="portfolio_add.php">Portfolios ADD</a>
                             </li>
                         </ul>
                     </li>

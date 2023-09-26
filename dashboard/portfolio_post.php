@@ -75,22 +75,36 @@ if(isset($_POST['update_btn'])){
     $temp_name=$_FILES['image']['tmp_name'];
     $explode = explode(".",$image);
     $extension = end($explode);
-    $new_name = $id."-".date("Y-m-d")."-".".".$extension;
+    $new_name = $id.$title."-".date("Y-m-d")."-".".".$extension;
     $path = "../images/portfolio_image/".$new_name;
-
     
+    if($title && $description ){
+      $update_query = "UPDATE portfolios SET title='$title',description='$description' WHERE id='$id'";
+      mysqli_query($db_connect,$update_query);
+      $_SESSION['portfolio_update_success'] = "Your Portfolio Updated successfully";
+      header("location: portfolios.php");
+  }else{
+       $_SESSION['portfolio_update_error'] = "You have to fill all information.";
+       header("location: portfolio_update.php");
+  }
 
-    if(move_uploaded_file( $temp_name, $path)){
-        if($title && $description && $image){
-            $update_query = "UPDATE portfolios SET title='$title',description='$description',image='$new_name' WHERE id='$id'";
-            mysqli_query($db_connect,$update_query);
-            $_SESSION['portfolio_update_success'] = "Your Portfolio Updated successfully";
-            header("location: portfolios.php");
-        }else{
-             $_SESSION['portfolio_update_error'] = "You have to fill all information.";
-             header("location: portfolio_update.php");
-        }
+      // getting single image for replace that image 
+      $select_data ="SELECT * FROM portfolios WHERE id='$id'";
+      $connect=mysqli_query($db_connect,$select_data);
+      $single_data = mysqli_fetch_assoc($connect);
+      $db_image= $single_data['image'];
+      $db_path = "../images/portfolio_image/".$db_image;
+
+  if($image){
+    if(move_uploaded_file($temp_name, $path )){
+        unlink($db_path);
+        $update_query = "UPDATE portfolios SET image='$new_name' WHERE id='$id'";
+        mysqli_query($db_connect,$update_query);
+        $_SESSION['portfolio_update_success'] = "Your Portfolio Updated successfully";
+        header("location: portfolios.php");
+
     }
+  }
 
 
 }

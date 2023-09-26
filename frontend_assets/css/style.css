@@ -1669,17 +1669,17 @@ label {
 	background: #19273e;
 	padding: 20px 30px;
 	margin-bottom: 30px;
-	text-transform: capitalize;
+	
 	color: #8b98af;
 	font-size: 14px;
 }
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
+.contact-div input::placeholder,
+.contact-div textarea::placeholder {
 	color: #8b98af;
 	font-size: 14px;
 	letter-spacing: 1px;
 }
-.contact-form textarea {
+.contact-div textarea {
 	height: 130px;
 	margin-bottom: 40px;
 }

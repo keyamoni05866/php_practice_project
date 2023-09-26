@@ -60,7 +60,7 @@ unset($_SESSION['portfolio_update_error']) ?>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Portfolio Image</label>
                         <!-- <img style=" height:100px; width:100px; margin-bottom:10px; border-radius:30%;" src="../images/portfolio_image/<?= $portfolio['image']?>"> -->
-                        <input type="file" class="form-control" name="image"> 
+                        <input type="file" class="form-control" name="image" value="<?= $portfolio['image']?>"> 
                        
 
                       
