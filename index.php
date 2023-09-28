@@ -18,6 +18,10 @@ $portfolios = mysqli_query($db_connect, $select_portfolio);
 
 $select_testimonial = "SELECT * FROM testimonial WHERE status='active' ";
 $testimonials = mysqli_query($db_connect, $select_testimonial);
+
+
+$select_facts = "SELECT * FROM facts WHERE status='active' ";
+$facts = mysqli_query($db_connect, $select_facts);
 ?>
 
 
@@ -344,50 +348,23 @@ $testimonials = mysqli_query($db_connect, $select_testimonial);
             <div class="container">
                 <div class="fact-wrap">
                     <div class="row justify-content-between">
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
+                    <?php foreach($facts as $fact):?>
+                        <div class="col-xl-2 col-lg-3 col-sm-6 ">
+                           
                             <div class="fact-box text-center mb-50">
                                 <div class="fact-icon">
-                                    <i class="flaticon-award"></i>
+                                    <i class="<?=$fact['icon']?>"></i>
                                 </div>
                                 <div class="fact-content">
-                                    <h2><span class="count">245</span></h2>
-                                    <span>Feature Item</span>
+                                    <h2><span class=""><?=$fact['number']?></span></h2>
+                                    <span><?=$fact['name']?></span>
                                 </div>
                             </div>
+                      
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-like"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">345</span></h2>
-                                    <span>Active Products</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-event"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">39</span></h2>
-                                    <span>Year Experience</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-sm-6">
-                            <div class="fact-box text-center mb-50">
-                                <div class="fact-icon">
-                                    <i class="flaticon-woman"></i>
-                                </div>
-                                <div class="fact-content">
-                                    <h2><span class="count">3</span>k</h2>
-                                    <span>Our Clients</span>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach;?>
+                       
+                        
                     </div>
                 </div>
             </div>
