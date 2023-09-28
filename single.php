@@ -62,7 +62,7 @@ require('./config/db.php');
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav ml-auto">
-                                            <li hidden class="nav-item active"><a class="nav-link" href="index.php#portfolio">Home</a></li>
+                                            
                                             <li class="nav-item active"><a class="nav-link" href="index.php#home">Home</a></li>
                                             <li class="nav-item"><a class="nav-link" href="index.php#about">about</a></li>
                                             <li class="nav-item"><a class="nav-link" href="index.php#service">service</a></li>

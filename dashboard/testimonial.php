@@ -3,29 +3,29 @@ include('./extends/header.php');
 include('../config/db.php');
 
 
-$select_portfolio = "SELECT * FROM portfolios";
-$portfolios = mysqli_query($db_connect, $select_portfolio);
+$select_testimonial = "SELECT * FROM testimonial";
+$testimonials = mysqli_query($db_connect, $select_testimonial);
 $num = 0;
 ?>
 
 
-<!-- portfolios success -->
-<?php if (isset($_SESSION['portfolio_success'])) : ?>
+<!-- testimonial success -->
+<?php if (isset($_SESSION['testimonial_success'])) : ?>
 
 
 
-    <div class="alert alert-custom " role="alert" style="width: 25%;  float:right;">
-        <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
-        <div class="alert-content">
-            <span class="alert-title">Congratulations,</span>
-            <span class="alert-text"><?= $_SESSION['portfolio_success']; ?></span>
-        </div>
+<div class="alert alert-custom " role="alert" style="width: 25%; height: 25%;  float:right;">
+    <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
+    <div class="alert-content">
+        <span class="alert-title"></span>
+        <span class="alert-text"><?= $_SESSION['testimonial_success']; ?></span>
     </div>
+</div>
 <?php endif;
-unset($_SESSION['portfolio_success']) ?>
+unset($_SESSION['testimonial_success']) ?>
 
 
-<!-- portfolio  delete -->
+<!-- service  delete -->
 <?php if (isset($_SESSION['delete_item'])) : ?>
 
 
@@ -41,9 +41,9 @@ unset($_SESSION['portfolio_success']) ?>
 unset($_SESSION['delete_item']) ?>
 
 
-<!-- service updated success -->
+<!-- testimonial updated success -->
 
-<?php if (isset($_SESSION['portfolio_update_success'])) : ?>
+<?php if (isset($_SESSION['testimonial_update_success'])) : ?>
 
 
 
@@ -51,11 +51,11 @@ unset($_SESSION['delete_item']) ?>
     <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
     <div class="alert-content">
         <span class="alert-title">Congratulations,</span>
-        <span class="alert-text"><?= $_SESSION['portfolio_update_success']; ?></span>
+        <span class="alert-text"><?= $_SESSION['testimonial_update_success']; ?></span>
     </div>
 </div>
 <?php endif;
-unset($_SESSION['portfolio_update_success']) ?>
+unset($_SESSION['testimonial_update_success']) ?>
 
 <div class="row">
     <div class="col">
@@ -94,8 +94,9 @@ unset($_SESSION['portfolio_update_success']) ?>
                 <tr>
                     <th scope="">Serial</th>
                     <th scope="">Image</th>
-                    <th scope="">Title</th>
-                    <th scope="">Description</th>
+                    <th scope="">Name</th>
+                    <th scope="">Profession</th>
+                    <th scope="">Message</th>
                     <th scope="">Status</th>
                     <th scope="">Action</th>
                     <th scope=""></th>
@@ -104,32 +105,33 @@ unset($_SESSION['portfolio_update_success']) ?>
             </thead>
             <tbody>
          
-                <?php foreach ($portfolios as $portfolio) : ?>
+                <?php foreach ($testimonials as $testimonial) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
                    <td>
-                    <img src="../images/portfolio_image/<?= $portfolio['image'] ?>" alt="" style="height:80px; width:80px; border-radius:50%;">
+                    <img src="../images/testimonial_image/<?= $testimonial['image'] ?>" alt="" style="height:50px; width:50px; border-radius:50%;">
                      
                     </td>
-                        <td><?= $portfolio['title'] ?></td>
-                        <td><?= $portfolio['description'] ?></td>
+                        <td><?= $testimonial['name'] ?></td>
+                        <td><?= $testimonial['profession'] ?></td>
+                        <td><?= $testimonial['message'] ?></td>
                         <td>
 
 
-            <?php if ($portfolio['status'] == 'active') : ?>
-            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
+            <?php if ($testimonial['status'] == 'active') : ?>
+            <a href="testimonial_post.php?change_status=<?= $testimonial['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $testimonial['status'] ?></a>
             <?php else : ?>
-            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
+            <a href="testimonial_post.php?change_status=<?= $testimonial['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $testimonial['status'] ?></a>
             <?php endif; ?>
 
                         </td>
 
 
                         <td>
-                            <a href="portfolio_update.php?edit_id=<?= $portfolio['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
+                            <a href="testimonial_edit.php?edit_id=<?= $testimonial['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
                             
                         </td>
-                        <td><a href="portfolio_post.php?delete_id=<?= $portfolio['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
+                        <td><a href="testimonial_post.php?delete_id=<?= $testimonial['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
                     </tr>
                 <?php endforeach; ?>
 

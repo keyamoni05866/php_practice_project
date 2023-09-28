@@ -114,6 +114,18 @@ if (!isset($_SESSION['admin_id'])) {
                             </li>
                         </ul>
                     </li>
+
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'testimonial.php' ? 'active-page' : ' '; ?>">
+             <a href="testimonial.php"><i class="material-icons-two-tone">chat</i>Testimonial<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="testimonial.php">Testimonial Show</a>
+                            </li>
+                            <li>
+                                <a href="testimonial_add.php">Testimonial ADD</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

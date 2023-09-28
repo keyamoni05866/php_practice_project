@@ -17,7 +17,9 @@ if(isset($_POST['mail_send_btn'])){
     $subject2 = $_POST['subject'];
     $body = "Thank You $name dear for your valuable message";
     $body2 = $_POST['message'];
+    
     $date = date("Y-m-d");
+
     if($name && $send_email_to && $subject && $body){
         $mail = new PHPMailer(true);
             //Server settings
@@ -49,6 +51,7 @@ if(isset($_POST['mail_send_btn'])){
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();
+    // insert query
              if($name && $send_email_to && $subject2 && $body2){
      $insert_query = "INSERT INTO contact (name,email,subject,message,date) VALUES ('$name','$send_email_to','$subject2','$body2','$date')";
                 mysqli_query($db_connect,$insert_query);
