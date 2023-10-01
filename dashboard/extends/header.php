@@ -134,7 +134,37 @@ if (!isset($_SESSION['admin_id'])) {
                                 <a href="facts.php">Facts Show</a>
                             </li>
                             <li>
-                                <a href="Fact_add.php">Facts ADD</a>
+                                <a href="fact_add.php">Facts ADD</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'about.php' ? 'active-page' : ' '; ?>">
+             <a href="facts.php"><i class="material-icons-two-tone">school</i>About<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="about.php">About Details</a>
+                            </li>
+                            <li>
+                                <a href="about_add.php">Add About Yourself</a>
+                            </li>
+                            <li>
+                                <a href="skills.php">Skills List</a>
+                            </li>
+                            <li>
+                                <a href="skill_add.php">Add Your Skill.</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+
+                    <li class="<?= basename($_SERVER['PHP_SELF']) == 'brands.php' ? 'active-page' : ' '; ?>">
+             <a href="facts.php"><i class="material-icons-two-tone">branding_watermark</i>Brands<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="brands.php">Brands List</a>
+                            </li>
+                            <li>
+                                <a href="brand_add.php">Brands ADD</a>
                             </li>
                         </ul>
                     </li>

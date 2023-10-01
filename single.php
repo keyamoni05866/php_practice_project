@@ -1,8 +1,16 @@
 <?php
 require('./config/db.php');
-      $id=$_GET['single_page'];
-     $select_portfolio = "SELECT * FROM portfolios WHERE id='$id'";
-      $portfolios = mysqli_query($db_connect, $select_portfolio);
+
+$users_select_query = "SELECT * FROM users";
+$users_connect = mysqli_query($db_connect, $users_select_query);
+$users = mysqli_fetch_assoc($users_connect);
+
+$id=$_GET['single_page'];
+$select_portfolio = "SELECT * FROM portfolios WHERE id='$id'";
+$portfolios = mysqli_query($db_connect, $select_portfolio);
+
+$select_about = "SELECT * FROM about WHERE status='active' ";
+$abouts = mysqli_query($db_connect, $select_about);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -52,7 +60,7 @@ require('./config/db.php');
                         <div class="col-xl-12">
                             <div class="main-menu">
                                 <nav class="navbar navbar-expand-lg">
-                                    <a href="index.html" class="navbar-brand logo-sticky-none"><img src="img/logo/logo.png" alt="Logo"></a>
+                                    <a href="index.html" class="navbar-brand logo-sticky-none"><img src="./frontend_assets/img/logo/logo.png" alt="Logo"></a>
                                     <a href="index.html" class="navbar-brand s-logo-none"><img src="img/logo/s_logo.png" alt="Logo"></a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarNav">
@@ -63,7 +71,7 @@ require('./config/db.php');
                                     <div class="collapse navbar-collapse" id="navbarNav">
                                         <ul class="navbar-nav ml-auto">
                                             
-                                            <li class="nav-item active"><a class="nav-link" href="index.php#home">Home</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="http://localhost/kufa#home">Home</a></li>
                                             <li class="nav-item"><a class="nav-link" href="index.php#about">about</a></li>
                                             <li class="nav-item"><a class="nav-link" href="index.php#service">service</a></li>
                                             <li class="nav-item"><a class="nav-link" href="index.php#portfolio">portfolio</a></li>
@@ -81,38 +89,38 @@ require('./config/db.php');
             </div>
             <!-- offcanvas-start -->
             <div class="extra-info">
-                <div class="close-icon menu-close">
-                    <button>
-                        <i class="far fa-window-close"></i>
-                    </button>
+            <div class="close-icon menu-close">
+                <button>
+                    <i class="far fa-window-close"></i>
+                </button>
+            </div>
+            <div class="logo-side mb-30">
+                <a href="index-2.html">
+                    <img src="./frontend_assets/img/logo/logo.png" alt="" />
+                </a>
+            </div>
+            <div class="side-info mb-30">
+                <?php foreach($abouts as $about):?>
+                <div class="contact-list mb-30">
+                    <h4>Office Address</h4>
+                    <p><?= $about['address']?></p>
                 </div>
-                <div class="logo-side mb-30">
-                    <a href="index-2.html">
-                        <img src="img/logo/logo.png" alt="" />
-                    </a>
+                <div class="contact-list mb-30">
+                    <h4>Phone Number</h4>
+                    <p><?= $about['phone']?></p>
                 </div>
-                <div class="side-info mb-30">
-                    <div class="contact-list mb-30">
-                        <h4>Office Address</h4>
-                        <p>123/A, Miranda City Likaoli
-                            Prikano, Dope</p>
-                    </div>
-                    <div class="contact-list mb-30">
-                        <h4>Phone Number</h4>
-                        <p>+0989 7876 9865 9</p>
-                    </div>
-                    <div class="contact-list mb-30">
-                        <h4>Email Address</h4>
-                        <p>info@example.com</p>
-                    </div>
-                </div>
-                <div class="social-icon-right mt-20">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                <div class="contact-list mb-30">
+                    <h4>Email Address</h4>
+                    <p><?= $about['gmail']?></p>
                 </div>
             </div>
+            <div class="social-icon-right mt-20">
+                <a href="<?= $about['facebook']?>"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?= $about['linkedin']?>"><i class="fab fa-linkedin"></i></a>
+            
+            </div>
+            <?php endforeach;?>
+        </div>
             <div class="offcanvas-overly"></div>
             <!-- offcanvas-end -->
         </header>
@@ -168,22 +176,21 @@ require('./config/db.php');
                                 <div class="avatar-post mt-70 mb-60">
                                     <ul>
                                         <li>
+                                        <?php foreach($abouts as $about):?>
                                             <div class="post-avatar-img">
-                                                <img src="img/blog/post_avatar_img.png" alt="img">
+                                                <img src="./images/about_image/<?= $about['image']; ?>" alt="img" style="width:80px; height:80px;">
                                             </div>
                                             <div class="post-avatar-content">
-                                                <h5>Thomas Herlihy</h5>
-                                                <p>Vehicula dolor amet consectetur adipiscing elit. Cras sollicitudin, tellus vitae
-                                                    condimem
-                                                    egestliberos dolor auctor
-                                                    tellus.</p>
+                                                <h5><?= $users['name'] ?></h5>
+                                                <p><?= $about['description']?></p>
                                                 <div class="post-avatar-social mt-15">
-                                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                                    <a href="<?= $about['facebook']?>"><i class="fab fa-facebook-f"></i></a>
+                                                    <a href="<?= $about['linkedin']?>"><i class="fab fa-linkedin"></i></a>
+                                                   
                                                 </div>
                                             </div>
                                         </li>
+                                        <?php endforeach;?>
                                     </ul>
                                 </div>
                             </div>

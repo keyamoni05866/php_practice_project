@@ -22,6 +22,19 @@ $testimonials = mysqli_query($db_connect, $select_testimonial);
 
 $select_facts = "SELECT * FROM facts WHERE status='active' ";
 $facts = mysqli_query($db_connect, $select_facts);
+
+
+$select_brand = "SELECT * FROM brands  ";
+$brands = mysqli_query($db_connect, $select_brand);
+
+
+
+
+$select_about = "SELECT * FROM about WHERE status='active' ";
+$abouts = mysqli_query($db_connect, $select_about);
+
+$select_skill = "SELECT * FROM skills WHERE status='active' ";
+$skills = mysqli_query($db_connect, $select_skill);
 ?>
 
 
@@ -118,26 +131,26 @@ $facts = mysqli_query($db_connect, $select_facts);
                 </a>
             </div>
             <div class="side-info mb-30">
+                <?php foreach($abouts as $about):?>
                 <div class="contact-list mb-30">
                     <h4>Office Address</h4>
-                    <p>123/A, Miranda City Likaoli
-                        Prikano, Dope</p>
+                    <p><?= $about['address']?></p>
                 </div>
                 <div class="contact-list mb-30">
                     <h4>Phone Number</h4>
-                    <p>+0989 7876 9865 9</p>
+                    <p><?= $about['phone']?></p>
                 </div>
                 <div class="contact-list mb-30">
                     <h4>Email Address</h4>
-                    <p>info@example.com</p>
+                    <p><?= $about['gmail']?></p>
                 </div>
             </div>
             <div class="social-icon-right mt-20">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="<?= $about['facebook']?>"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?= $about['linkedin']?>"><i class="fab fa-linkedin"></i></a>
+            
             </div>
+            <?php endforeach;?>
         </div>
         <div class="offcanvas-overly"></div>
         <!-- offcanvas-end -->
@@ -199,28 +212,34 @@ $facts = mysqli_query($db_connect, $select_facts);
         <section id="about" class="about-area primary-bg pt-120 pb-120">
             <div class="container">
                 <div class="row align-items-center">
+                    <?php foreach($abouts as $about):?>
                     <div class="col-lg-6">
                         <div class="about-img">
-                            <img src="./frontend_assets/img/banner/banner_img2.png" title="me-01" alt="me-01">
+                            <img src="./images/about_image/<?= $about['image']; ?>" title="me-01" alt="me-01"  class="rounded ">
                         </div>
                     </div>
+                    <?php endforeach;?>
                     <div class="col-lg-6 pr-90">
                         <div class="section-title mb-25">
                             <span>Introduction</span>
                             <h2>About Me</h2>
                         </div>
                         <div class="about-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, sed repudiandae odit deserunt, quas
-                                quibusdam necessitatibus nesciunt eligendi esse sit non reprehenderit quisquam asperiores maxime
-                                blanditiis culpa vitae velit. Numquam!</p>
-                            <h3>Education:</h3>
+                            
+                        <?php foreach($abouts as $about):?>
+                            <p><?= $about['description']?></p>
+
+                                <?php endforeach;?>    
+                            <h3>Skills:</h3>
                         </div>
                         <!-- Education Item -->
+
+                    <?php foreach($skills as $skill):?>
                         <div class="education">
-                            <div class="year">2020</div>
+                            <div class="year"><?= $skill['year']?></div>
                             <div class="line"></div>
                             <div class="location">
-                                <span>PHD of Interaction Design &amp; Animation</span>
+                                <span><?= $skill['skill']?></span>
                                 <div class="progressWrapper">
                                     <div class="progress">
                                         <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
@@ -228,48 +247,18 @@ $facts = mysqli_query($db_connect, $select_facts);
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach;?>
+
+
                         <!-- End Education Item -->
                         <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2016</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Master of Database Administration</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
                         <!-- End Education Item -->
                         <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2010</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Bachelor of Computer Engineering</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!-- End Education Item -->
                         <!-- Education Item -->
-                        <div class="education">
-                            <div class="year">2005</div>
-                            <div class="line"></div>
-                            <div class="location">
-                                <span>Diploma of Computer</span>
-                                <div class="progressWrapper">
-                                    <div class="progress">
-                                        <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <!-- End Education Item -->
                     </div>
                 </div>
@@ -413,36 +402,14 @@ $facts = mysqli_query($db_connect, $select_facts);
         <div class="barnd-area pt-100 pb-100">
             <div class="container">
                 <div class="row brand-active">
+                    <?php foreach($brands as $brand):?>
                     <div class="col-xl-2">
                         <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img01.png" alt="img">
+                            <img src="./images/brand_image/<?= $brand['image']; ?>" alt="img">
+                            <h6 class="mt-5"><?= $brand['name']; ?></h6>
                         </div>
                     </div>
-                    <div class="col-xl-2">
-                        <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img02.png" alt="img">
-                        </div>
-                    </div>
-                    <div class="col-xl-2">
-                        <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img03.png" alt="img">
-                        </div>
-                    </div>
-                    <div class="col-xl-2">
-                        <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img04.png" alt="img">
-                        </div>
-                    </div>
-                    <div class="col-xl-2">
-                        <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img05.png" alt="img">
-                        </div>
-                    </div>
-                    <div class="col-xl-2">
-                        <div class="single-brand">
-                            <img src="./frontend_assets/img/brand/brand_img03.png" alt="img">
-                        </div>
-                    </div>
+                  <?php endforeach;?>
                 </div>
             </div>
         </div>
@@ -463,9 +430,11 @@ $facts = mysqli_query($db_connect, $select_facts);
                             <h5>OFFICE IN <span>NEW YORK</span></h5>
                             <div class="contact-list">
                                 <ul>
-                                    <li><i class="fas fa-map-marker"></i><span>Address :</span>Event Center park WT 22 New York</li>
-                                    <li><i class="fas fa-headphones"></i><span>Phone :</span>+9 125 645 8654</li>
-                                    <li><i class="fas fa-globe-asia"></i><span>e-mail :</span>info@exemple.com</li>
+                                     <?php foreach($abouts as $about)?>
+                                    <li><i class="fas fa-map-marker"></i><span>Address :</span><?= $about['address']?></li>
+                                    <li><i class="fas fa-headphones"></i><span>Phone :</span><?= $about['phone']?></li>
+                                    <li><i class="fas fa-globe-asia"></i><span>e-mail :</span><?= $about['gmail']?></li>
+
                                 </ul>
                             </div>
                         </div>

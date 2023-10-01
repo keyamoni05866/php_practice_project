@@ -5,6 +5,8 @@ include('../config/db.php');
 
 $select_fact = "SELECT * FROM facts";
 $facts= mysqli_query($db_connect, $select_fact);
+
+$single_data = mysqli_fetch_assoc($facts);
 $num = 0;
 ?>
 
@@ -103,7 +105,7 @@ unset($_SESSION['fact_update_success']) ?>
                 </tr>
             </thead>
             <tbody>
-         
+         <?php if($single_data):?>
                 <?php foreach ($facts as $fact) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
@@ -132,7 +134,13 @@ unset($_SESSION['fact_update_success']) ?>
                         <td><a href="fact_post.php?delete_id=<?= $fact['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
                     </tr>
                 <?php endforeach; ?>
-
+                <?php else:?>
+                <tr>
+                 <td colspan="6" class="text-center text-danger">
+                                    <h2>No Data Found!</h2>
+                                </td>
+                            </tr>
+                    <?php endif; ?>
               
                    
             </tbody>

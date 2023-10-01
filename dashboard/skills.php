@@ -3,15 +3,15 @@ include('./extends/header.php');
 include('../config/db.php');
 
 
-$select_service = "SELECT * FROM services ";
-$services = mysqli_query($db_connect, $select_service);
-$single_data = mysqli_fetch_assoc($services);
+$select_skill = "SELECT * FROM skills ";
+$skills = mysqli_query($db_connect, $select_skill);
+$single_data = mysqli_fetch_assoc($skills);
 $num = 0;
 ?>
 
 
 <!-- service success -->
-<?php if (isset($_SESSION['service_success'])) : ?>
+<?php if (isset($_SESSION['skill_success'])) : ?>
 
 
 
@@ -19,11 +19,11 @@ $num = 0;
         <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
         <div class="alert-content">
             <span class="alert-title">Congratulations,</span>
-            <span class="alert-text"><?= $_SESSION['service_success']; ?></span>
+            <span class="alert-text"><?= $_SESSION['skill_success']; ?></span>
         </div>
     </div>
 <?php endif;
-unset($_SESSION['service_success']) ?>
+unset($_SESSION['skill_success']) ?>
 
 
 <!-- service  delete -->
@@ -42,9 +42,9 @@ unset($_SESSION['service_success']) ?>
 unset($_SESSION['service_delete']) ?>
 
 
-<!-- service updated success -->
+<!-- skill updated success -->
 
-<?php if (isset($_SESSION['service_update_success'])) : ?>
+<?php if (isset($_SESSION['skill_update_success'])) : ?>
 
 
 
@@ -52,31 +52,21 @@ unset($_SESSION['service_delete']) ?>
     <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
     <div class="alert-content">
         <span class="alert-title">Congratulations,</span>
-        <span class="alert-text"><?= $_SESSION['service_update_success']; ?></span>
+        <span class="alert-text"><?= $_SESSION['skill_update_success']; ?></span>
     </div>
 </div>
 <?php endif;
-unset($_SESSION['service_update_success']) ?>
+unset($_SESSION['skill_update_success']) ?>
 
 <div class="row">
     <div class="col">
         <div class="page-description">
-            <h1>Service Show</h1>
+            <h1>Skill List</h1>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-container bg-dark">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+
 
 
 
@@ -86,7 +76,7 @@ unset($_SESSION['service_update_success']) ?>
 
         <div class="card">
             <div class="card-header">
-                <h3 class="text-uppercase">Services List.</h3>
+                <h3 class="text-uppercase">Skill List.</h3>
             </div>
         </div>
 
@@ -94,9 +84,8 @@ unset($_SESSION['service_update_success']) ?>
             <thead class="table-dark">
                 <tr>
                     <th scope="">Serial</th>
-                    <th scope="">Icon</th>
-                    <th scope="">Title</th>
-                    <th scope="">Description</th>
+                    <th scope="">Skill Name</th>
+                    <th scope="">Year</th>
                     <th scope="">Status</th>
                     <th scope="">Action</th>
                     <th scope=""></th>
@@ -105,31 +94,32 @@ unset($_SESSION['service_update_success']) ?>
             </thead>
             <tbody>
          <?php if($single_data):?>
-                <?php foreach ($services as $service) : ?>
+                <?php foreach ($skills as $skill) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
-                        <td><?= $service['icon'] ?></td>
-                        <td><?= $service['title'] ?></td>
-                        <td><?= $service['description'] ?></td>
+                        <td><?= $skill['skill'] ?></td>
+                        <td><?= $skill['year'] ?></td>
+                       
                         <td>
 
 
-            <?php if ($service['status'] == 'active') : ?>
-            <a href="service_post.php?change_status=<?= $service['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $service['status'] ?></a>
+            <?php if ($skill['status'] == 'active') : ?>
+            <a href="skill_post.php?change_status=<?= $skill['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $skill['status'] ?></a>
             <?php else : ?>
-            <a href="service_post.php?change_status=<?= $service['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $service['status'] ?></a>
+            <a href="skill_post.php?change_status=<?= $skill['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $skill['status'] ?></a>
             <?php endif; ?>
 
                         </td>
 
 
                         <td>
-                            <a href="service_edit.php?edit_id=<?= $service['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
+                            <a href="skill_edit.php?edit_id=<?= $skill['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
                             
                         </td>
-                        <td><a href="service_post.php?delete_id=<?= $service['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
+                        <td><a href="skill_post.php?delete_id=<?= $skill['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
                     </tr>
                 <?php endforeach; ?>
+
                 <?php else:?>
                 <tr>
                  <td colspan="6" class="text-center text-danger">
@@ -137,7 +127,6 @@ unset($_SESSION['service_update_success']) ?>
                                 </td>
                             </tr>
                     <?php endif; ?>
-              
                    
             </tbody>
         </table>
@@ -151,4 +140,3 @@ include('./extends/footer.php')
 
 ?>
 
-<!--  -->

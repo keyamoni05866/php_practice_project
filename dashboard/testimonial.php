@@ -5,6 +5,7 @@ include('../config/db.php');
 
 $select_testimonial = "SELECT * FROM testimonial";
 $testimonials = mysqli_query($db_connect, $select_testimonial);
+$single_data = mysqli_fetch_assoc($testimonials);
 $num = 0;
 ?>
 
@@ -104,7 +105,7 @@ unset($_SESSION['testimonial_update_success']) ?>
                 </tr>
             </thead>
             <tbody>
-         
+         <?php if($single_data):?>
                 <?php foreach ($testimonials as $testimonial) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
@@ -135,7 +136,13 @@ unset($_SESSION['testimonial_update_success']) ?>
                     </tr>
                 <?php endforeach; ?>
 
-              
+                <?php else:?>
+                <tr>
+                 <td colspan="6" class="text-center text-danger">
+                                    <h2>No Data Found!</h2>
+                                </td>
+                            </tr>
+                    <?php endif; ?>
                    
             </tbody>
         </table>

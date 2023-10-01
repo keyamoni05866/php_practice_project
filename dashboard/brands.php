@@ -3,15 +3,15 @@ include('./extends/header.php');
 include('../config/db.php');
 
 
-$select_portfolio = "SELECT * FROM portfolios";
-$portfolios = mysqli_query($db_connect, $select_portfolio);
-$singel_data = mysqli_fetch_assoc($portfolios);
+$select_brand = "SELECT * FROM brands";
+$brands = mysqli_query($db_connect, $select_brand);
+$single_data= mysqli_fetch_assoc($brands);
 $num = 0;
 ?>
 
 
-<!-- portfolios success -->
-<?php if (isset($_SESSION['portfolio_success'])) : ?>
+<!--  success -->
+<?php if (isset($_SESSION['brand_success'])) : ?>
 
 
 
@@ -19,11 +19,11 @@ $num = 0;
         <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
         <div class="alert-content">
             <span class="alert-title">Congratulations,</span>
-            <span class="alert-text"><?= $_SESSION['portfolio_success']; ?></span>
+            <span class="alert-text"><?= $_SESSION['brand_success']; ?></span>
         </div>
     </div>
 <?php endif;
-unset($_SESSION['portfolio_success']) ?>
+unset($_SESSION['brand_success']) ?>
 
 
 <!-- portfolio  delete -->
@@ -42,9 +42,9 @@ unset($_SESSION['portfolio_success']) ?>
 unset($_SESSION['delete_item']) ?>
 
 
-<!-- service updated success -->
+<!--  updated success -->
 
-<?php if (isset($_SESSION['portfolio_update_success'])) : ?>
+<?php if (isset($_SESSION['brand_update_success'])) : ?>
 
 
 
@@ -52,31 +52,21 @@ unset($_SESSION['delete_item']) ?>
     <div class="custom-alert-icon icon-primary"><i class="material-icons-outlined">done</i></div>
     <div class="alert-content">
         <span class="alert-title">Congratulations,</span>
-        <span class="alert-text"><?= $_SESSION['portfolio_update_success']; ?></span>
+        <span class="alert-text"><?= $_SESSION['brand_update_success']; ?></span>
     </div>
 </div>
 <?php endif;
-unset($_SESSION['portfolio_update_success']) ?>
+unset($_SESSION['brand_update_success']) ?>
 
 <div class="row">
     <div class="col">
         <div class="page-description">
-            <h1>Portfolio Show</h1>
+            <h1>Brand Show</h1>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-container bg-dark">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+
 
 
 
@@ -86,7 +76,7 @@ unset($_SESSION['portfolio_update_success']) ?>
 
         <div class="card">
             <div class="card-header">
-                <h3 class="text-uppercase">Portfolio List.</h3>
+                <h3 class="text-uppercase">Brands List.</h3>
             </div>
         </div>
 
@@ -95,47 +85,37 @@ unset($_SESSION['portfolio_update_success']) ?>
                 <tr>
                     <th scope="">Serial</th>
                     <th scope="">Image</th>
-                    <th scope="">Title</th>
-                    <th scope="">Description</th>
-                    <th scope="">Status</th>
+                    <th scope="">Name</th>
+                  
                     <th scope="">Action</th>
                     <th scope=""></th>
 
                 </tr>
             </thead>
             <tbody>
-                <?php if($singel_data):?>
+                <?php if($single_data):?>
          
-                <?php foreach ($portfolios as $portfolio) : ?>
+                <?php foreach ($brands as $brand) : ?>
                     <tr>
                         <th scope="row"><?= ++$num ?></th>
                    <td>
-                    <img src="../images/portfolio_image/<?= $portfolio['image'] ?>" alt="" style="height:80px; width:80px; border-radius:50%;">
+                    <img src="../images/brand_image/<?= $brand['image'] ?>" alt="" style="height:80px; width:80px; border-radius:50%;">
                      
                     </td>
-                        <td><?= $portfolio['title'] ?></td>
-                        <td><?= $portfolio['description'] ?></td>
-                        <td>
-
-
-            <?php if ($portfolio['status'] == 'active') : ?>
-            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-success text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
-            <?php else : ?>
-            <a href="portfolio_post.php?change_status=<?= $portfolio['id'] ?>" class="btn btn-dark text-uppercase btn-sm"><?= $portfolio['status'] ?></a>
-            <?php endif; ?>
-
-                        </td>
+                        <td><?= $brand['name'] ?></td>
+                       
+      
 
 
                         <td>
-                            <a href="portfolio_update.php?edit_id=<?= $portfolio['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
+                            <a href="brand_update.php?edit_id=<?= $brand['id'] ?>" class="btn btn-info btn-sm">EDIT</a>
                             
                         </td>
-                        <td><a href="portfolio_post.php?delete_id=<?= $portfolio['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
+                        <td><a href="brand_post.php?delete_id=<?= $brand['id'] ?>" class="btn btn-danger btn-sm">DELETE</a></td>
                     </tr>
                 <?php endforeach; ?>
 
-                <?php else:?>
+              <?php else:?>
                 <tr>
                  <td colspan="6" class="text-center text-danger">
                                     <h2>No Data Found!</h2>

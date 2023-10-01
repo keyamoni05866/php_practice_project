@@ -11,7 +11,7 @@ if(isset($_POST['insert_btn'])){
     $temp_name=$_FILES['image']['tmp_name'];
     $explode = explode(".",$image);
     $extension = end($explode);
-    $new_name = $title."-".date("Y-m-d")."-".".".$extension = end($explode);
+    $new_name = $title."-".date("Y-m-d")."-".".".$extension ;
     $path = "../images/portfolio_image/".$new_name;
    if(move_uploaded_file($temp_name, $path)){
     if($title && $description && $image){
